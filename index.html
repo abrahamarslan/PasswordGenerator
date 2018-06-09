@@ -1,0 +1,142 @@
+<!doctype html>
+<html class="no-js" lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Password Generator Application [jQuery Vesion]</title>
+        <meta name="description" content="Strong password generator utility - Standalone [jQuery Version]">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'>
+
+
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+                <br><br>
+                <h1 class="header center orange-text">Password Generator Tool</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">Generate strong passwords which have symbols, numbers, in addition to upper and lower case letters makes it incredibly hard for hackers to steal your own individual accounts.</h5>
+                </div>
+                <br><br>
+
+                <!--Form-->
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <p class="range-field">
+                                <label for="password_length">Password Length</label>
+                                <input id="password_length" type="range" min="3" max="100" />
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="switch">
+                                <label>
+                                    Include Symbols
+                                    <input id="include_symbols" type="checkbox">
+                                    <span class="lever"></span>
+                                    [Example: *#@%$]
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="switch">
+                                <label>
+                                    Include Numbers
+                                    <input id="include_numbers" type="checkbox">
+                                    <span class="lever"></span>
+                                    [Example: 123...n]
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="switch">
+                                <label>
+                                    Include Uppercase Characters
+                                    <input id="include_uppercase" type="checkbox">
+                                    <span class="lever"></span>
+                                    [Example: ABC...Z]
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a class="waves-effect waves-light btn modal-trigger generate_password" href="#pwdModal">Generate Password</a>
+                        </div>
+                    </form>
+                </div>
+                <!--End Form-->
+            </div>
+        </div>
+
+        <!--Password Modal-->
+        <!-- Modal Structure -->
+        <div id="pwdModal" class="modal">
+            <div class="modal-content">
+                <h4>Generated Password</h4>
+                <p>Your Password is: </p>
+                <h5 id="generated_password"></h5>
+                <br/>
+                <a class="waves-effect waves-light btn copy_password" data-clipboard-target="#generated_password">Copy Password to Clipboard</a>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">OKAY</a>
+            </div>
+        </div>
+        <!--End Password Modal-->
+
+
+
+
+        <!-- Add your site or application content here -->
+        <p></p>
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!--//Initialize the password generator function-->
+        <script type="text/javascript">
+            $('.generate_password').on('click', function (event) {
+                PASSWORD_LENGTH = $('#password_length').val();
+                USE_UPPERCASE = $('#include_uppercase').is(":checked") ? true : false;
+                USE_NUMBERS = $('#include_numbers').is(":checked") ? true : false;
+                USE_SYMBOLS = $('#include_symbols').is(":checked") ? true : false;
+                //Generate password
+                var nPassword = generatePassword({
+                    'lowerCharacters': true,
+                    'upperCharacters': USE_UPPERCASE,
+                    'numbers': USE_NUMBERS,
+                    'symbols': USE_SYMBOLS
+                });
+                $('#generated_password').html(nPassword);
+            });
+        </script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    </body>
+</html>
